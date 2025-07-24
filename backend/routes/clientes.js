@@ -15,11 +15,11 @@ router.get('/', async (req, res) => {
 
 // Crear un cliente
 router.post('/', async (req, res) => {
-  const { nombre, email, telefono } = req.body
+  const { nombre_apellido, email, telefono } = req.body
   try {
     const result = await pool.query(
       'INSERT INTO clientes (nombre_apellido, email, telefono) VALUES ($1, $2, $3) RETURNING *',
-      [nombre, email, telefono]
+      [nombre_apellido, email, telefono]
     )
     res.status(201).json(result.rows[0])
   } catch (err) {
