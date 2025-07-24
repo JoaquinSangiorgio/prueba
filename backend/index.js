@@ -2,6 +2,10 @@ import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import { Resend } from 'resend'
+import clientesRoutes from './routes/clientes.js'
+import notificarRoutes from './routes/notificar.js'
+app.use('/api/notificar', notificarRoutes)
+
 
 dotenv.config()
 
@@ -43,6 +47,9 @@ app.post('/api/notificar', async (req, res) => {
     res.status(500).json({ error: 'Error interno del servidor' })
   }
 })
+
+
+app.use('/api/clientes', clientesRoutes)
 
 // Iniciar servidor
 app.listen(PORT, () => {
