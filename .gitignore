@@ -1,25 +1,24 @@
-# Ignorar entorno de backend
-/backend/node_modules
-/backend/.env
-/backend/*.log
-
-# Ignorar entorno de frontend
-/frontend/node_modules
-/frontend/.env
-/frontend/dist
-/frontend/.DS_Store
-
-# General
-.env
+# Logs
+logs
 *.log
-.DS_Store
-*.env.*
-.vscode
-.idea
-*.sqlite
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# Optional: ignorar carpeta build si unís front+back
-/build
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
