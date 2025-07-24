@@ -18,7 +18,7 @@ router.post('/', async (req, res) => {
   const { nombre, email, telefono } = req.body
   try {
     const result = await pool.query(
-      'INSERT INTO clientes (nombre, email, telefono) VALUES ($1, $2, $3) RETURNING *',
+      'INSERT INTO clientes (nombre_apellido, email, telefono) VALUES ($1, $2, $3) RETURNING *',
       [nombre, email, telefono]
     )
     res.status(201).json(result.rows[0])
