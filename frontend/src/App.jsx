@@ -1,38 +1,49 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import Clientes from './Clientes'
 import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [mensaje, setMensaje] = useState(null)
+
+  const API_URL = import.meta.env.VITE_API_URL
+
+  const enviarCorreo = async () => {
+    try {
+      const respuesta = await fetch(`${API_URL}/api/notificar`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          to: 'joaquin.sangiorgio@saudasrl.com.ar',
+          asunto: 'Correo de prueba desde frontend',
+          cuerpo: 'Hola Joaquín, este es un mensaje de prueba desde tu frontend conectado al backend.'
+        })
+      })
+
+      const data = await respuesta.json()
+      if (respuesta.ok) {
+        setMensaje('✅ Correo enviado correctamente')
+      } else {
+        setMensaje(`❌ Error: ${data.error}`)
+      }
+    } catch (error) {
+      setMensaje(`❌ Error general: ${error.message}`)
+    }
+  }
+
 
   return (
-    <>
-      
-
-
-
-
-
-
-
-
-
-
-      
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+    <div>
+      <div className="card" style={{ marginTop: '2rem' }}>
+        <h2>📬 Enviar correo de prueba</h2>
+        <button onClick={enviarCorreo}>Enviar correo</button>
+        {mensaje && <p>{mensaje}</p>}
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+
+      <hr style={{ margin: '2rem 0' }} />
+
+      <Clientes />
+    </div>
   )
 }
 
