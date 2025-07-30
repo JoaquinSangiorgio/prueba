@@ -7,6 +7,8 @@ function Clientes() {
   const [nombre_apellido, setNombre] = useState('')
   const [email, setEmail] = useState('')
   const [telefono, setTelefono] = useState('')
+  const [editandoId, setEditandoId] = useState(null)
+  const [editData, setEditData] = useState({ nombre_apellido: '', email: '', telefono: '' })
 
   const obtenerClientes = async () => {
     const res = await fetch(`${API_URL}/api/clientes`)
@@ -34,6 +36,34 @@ function Clientes() {
     obtenerClientes()
   }
 
+ const comenzarEdicion = (cliente) => {
+    setEditandoId(cliente.id)
+    setEditData({
+      nombre_apellido: cliente.nombre_apellido,
+      email: cliente.email,
+      telefono: cliente.telefono
+    })
+  }
+
+    const cancelarEdicion = () => {
+    setEditandoId(null)
+    setEditData({ nombre_apellido: '', email: '', telefono: '' })
+  }
+
+  const guardarEdicion = async (id) => {
+    await fetch(`${API_URL}/api/clientes/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(editData)
+    })
+    setEditandoId(null)
+    obtenerClientes()
+  }
+
+
+
+
+
   useEffect(() => {
     obtenerClientes()
   }, [])
@@ -59,11 +89,33 @@ function Clientes() {
           {clientes.map(c => (
             <tr key={c.id}>
               <td>{c.id}</td>
-              <td>{c.nombre_apellido}</td>
-              <td>{c.email}</td>
-              <td>{c.telefono}</td>
               <td>
-                <button onClick={() => eliminarCliente(c.id)}>🗑️ Eliminar</button>
+                {editandoId === c.id ? (
+                  <input value={editData.nombre_apellido} onChange={e => setEditData({ ...editData, nombre_apellido: e.target.value })} />
+                ) : c.nombre_apellido}
+              </td>
+              <td>
+                {editandoId === c.id ? (
+                  <input value={editData.email} onChange={e => setEditData({ ...editData, email: e.target.value })} />
+                ) : c.email}
+              </td>
+              <td>
+                {editandoId === c.id ? (
+                  <input value={editData.telefono} onChange={e => setEditData({ ...editData, telefono: e.target.value })} />
+                ) : c.telefono}
+              </td>
+              <td>
+                {editandoId === c.id ? (
+                  <>
+                    <button onClick={() => guardarEdicion(c.id)}>💾 Guardar</button>
+                    <button onClick={cancelarEdicion}>❌ Cancelar</button>
+                  </>
+                ) : (
+                  <>
+                    <button onClick={() => comenzarEdicion(c)}>✏️ Editar</button>
+                    <button onClick={() => eliminarCliente(c.id)}>🗑️ Eliminar</button>
+                  </>
+                )}
               </td>
             </tr>
           ))}

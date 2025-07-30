@@ -10,3 +10,8 @@ export const pool = new Pool({
     rejectUnauthorized: false, // necesario para Railway
   },
 })
+
+// await pool.query(`ALTER TABLE pagos RENAME COLUMN "descripción" TO descripcion`)
+
+
+// await pool.query(`ALTER TABLE servicios DROP COLUMN mes`)
