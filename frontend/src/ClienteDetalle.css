@@ -1,0 +1,48 @@
+/* ClienteDetalle.css */
+
+.cliente-detalle {
+  padding: 2rem;
+}
+
+.cliente-detalle h2 {
+  margin-bottom: 0.5rem;
+}
+
+.cliente-detalle p {
+  margin: 0.3rem 0;
+}
+
+.cliente-detalle hr {
+  margin: 2rem 0;
+  border: none;
+  border-top: 1px solid #ccc;
+}
+
+.propiedades-lista li {
+  margin-bottom: 0.5rem;
+}
+
+.pagos-tabla {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.pagos-tabla th,
+.pagos-tabla td {
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.volver-btn {
+  margin-bottom: 1rem;
+  padding: 0.4rem 0.8rem;
+  background-color: #f0f0f0;
+  border: none;
+  cursor: pointer;
+}
+
+.volver-btn:hover {
+  background-color: #ddd;
+}

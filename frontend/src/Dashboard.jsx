@@ -1,3 +1,4 @@
+import './Dashboard.css'
 import { useEffect, useState } from 'react'
 
 const API_URL = import.meta.env.VITE_API_URL
@@ -27,7 +28,6 @@ function Dashboard() {
     setOcupadas(props.filter(p => p.estado === 'Ocupada').length)
     setTotalClientes(clientes.length)
 
-    // 💰 Sumar pagos del mes actual
     const now = new Date()
     const mesActual = now.getMonth() + 1
     const anioActual = now.getFullYear()
@@ -45,38 +45,12 @@ function Dashboard() {
   }
 
   return (
-    <div style={{ padding: '2rem' }}>
-      <h2>📊 Dashboard General</h2>
-
-      <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap', marginTop: '2rem' }}>
-        <div style={cardStyle}>
-          <h3>🏠 Propiedades Totales</h3>
-          <p>{totalProps}</p>
-        </div>
-        <div style={cardStyle}>
-          <h3>🔴 Ocupadas</h3>
-          <p>{ocupadas}</p>
-        </div>
-        <div style={cardStyle}>
-          <h3>👥 Clientes</h3>
-          <p>{totalClientes}</p>
-        </div>
-        <div style={cardStyle}>
-          <h3>💰 Ingresos del mes</h3>
-          <p>${ingresos.toLocaleString()}</p>
-        </div>
-      </div>
-    </div>
+      
+<header>
+  
+</header>
+      
   )
-}
-
-const cardStyle = {
-  flex: '1 1 200px',
-  background: '#f4f4f4',
-  border: '1px solid #ccc',
-  padding: '1rem',
-  borderRadius: '8px',
-  textAlign: 'center'
 }
 
 export default Dashboard

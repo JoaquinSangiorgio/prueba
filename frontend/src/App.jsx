@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import Clientes from './Clientes'
 import Propiedades from './Propiedades'
 import Pagos from './Pagos'
+import ClienteDetalle from './ClienteDetalle'
 // import Servicios from './Servicios' // Más adelante
 import Dashboard from './Dashboard' // Opcional
 
@@ -25,6 +26,7 @@ function App() {
         <Route path="/" element={<Dashboard />} />
         <Route path="/clientes" element={<Clientes />} />
         <Route path="/propiedades" element={<Propiedades />} />
+        <Route path="/clientes/:id" element={<ClienteDetalle />} />
         <Route path="/pagos" element={<Pagos />} />
         {/* <Route path="/servicios" element={<Servicios />} /> */}
       </Routes>
